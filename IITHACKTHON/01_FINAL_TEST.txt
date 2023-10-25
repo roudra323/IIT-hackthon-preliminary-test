@@ -1,0 +1,42 @@
+Q-1:
+The approve() function in the ERC20 standard is used to authorize a spender to spend a specific amount of tokens on behalf of the owner.
+One option to using the approve() function is to use the transferFrom() function. The transferFrom() function allows a sender to transfer tokens from another account (the owner) to a recipient address. This can be used to achieve the same result as the approve() code, but it requires that the sender have access to the owner's private key.
+
+Q-2:
+https://drive.google.com/file/d/1lTKBCmgpKSZawOwiJUj1dwnTI7VMLx3w/view?usp=sharing
+
+
+Q-3:
+
+Remix is a browser-based IDE that allows you to develop, deploy, and interact with smart contracts without having to install any additional software. It is a good choice for beginners and for quickly testing out smart contract ideas.
+
+Hardhat, Truffle, and Foundry are all development platforms that provide a variety of features and tools for developing, testing, and deploying smart contracts. They are all written in JavaScript and can be used with any Solidity compiler.
+
+Q-4:
+code
+
+Q-5:
+
+Generic examples:
+
+Modularity and reuse: In normal software engineering, it is widely regarded best practice to design code in a modular style, with reusable components that can be simply plugged in and out. However, smart contracts are immutable, meaning that once deployed, they cannot be modified. This can make modularity and reuse more complex, since developers need to be careful to prevent any potential conflicts or weaknesses.
+Error handling: In regular software engineering, it is necessary to manage failures gracefully and avoid them from generating crashes or unexpected behavior. However, in smart contracts, errors can have more serious effects, as they might lead to cash losses or other security risks. As a result, developers need to be considerably more vigilant to ensure that their smart contracts handle failures effectively.
+Testing: Testing is vital for every software development project, but it is extremely important for smart contracts. Due to their immutability, it is particularly difficult to remedy issues in smart contracts after they are released. As a result, developers need to invest extensively in testing their smart contracts before deployment.
+
+
+Here are some examples of best practices in regular software engineering practice that may require a different approach in smart contract development:
+
+Generic examples:
+
+Modularity and reuse: In regular software engineering, it is generally considered best practice to design code in a modular way, with reusable components that can be easily plugged in and out. However, smart contracts are immutable, meaning that once deployed, they cannot be changed. This can make modularity and reuse more challenging, as developers need to be careful to avoid any potential conflicts or vulnerabilities.
+Error handling: In regular software engineering, it is important to handle errors gracefully and prevent them from causing crashes or unexpected behavior. However, in smart contracts, errors can have more serious consequences, as they can lead to financial losses or other security issues. As a result, developers need to be even more careful to ensure that their smart contracts handle errors correctly.
+Testing: Testing is essential for any software development project, but it is especially important for smart contracts. Due to their immutability, it is very difficult to fix bugs in smart contracts once they are deployed. As a result, developers need to invest heavily in testing their smart contracts before deployment.
+
+
+Specific examples:
+
+Use of dynamic arrays: In regular software engineering, it is often convenient to use dynamic arrays to store data. However, dynamic arrays can be vulnerable to reentrancy attacks in smart contracts.
+
+Use of recursion: Recursion is a powerful programming technique, but it can be dangerous to use in smart contracts. Recursive functions can consume a lot of gas, which can make smart contracts expensive to use. 
+
+Use of external libraries: In regular software engineering, it is often useful to use external libraries to add functionality to applications. However, external libraries can be vulnerable to security vulnerabilities

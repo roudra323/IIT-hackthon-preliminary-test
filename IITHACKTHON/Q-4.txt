@@ -1,0 +1,92 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract Election {
+
+    address public chairman;
+    address[] public boardMembers;
+    uint public registrationEndTime;
+    uint public votingEndTime;
+    bool public isVotingOpen;
+
+    struct Voter {
+        bool isRegistered;
+        bool hasVoted;
+        address chairmanCandidate;
+        address[] boardMemberCandidates;
+        bool votedAbstain;
+    }
+
+    mapping(address => Voter) public voters;
+
+    event ChairmanElected(address newChairman);
+    event BoardMembersElected(address[] newBoardMembers);
+
+    constructor(uint _registrationDuration, uint _votingDuration) {
+        chairman = address(0); // Initialize chairman as an empty address
+        registrationEndTime = block.timestamp + _registrationDuration;
+        votingEndTime = registrationEndTime + _votingDuration;
+        isVotingOpen = false;
+    }
+
+    modifier onlyDuringRegistration() {
+        require(block.timestamp < registrationEndTime, "Voter registration is closed.");
+        _;
+    }
+
+    modifier onlyDuringVoting() {
+        require(isVotingOpen, "Voting is closed.");
+        require(block.timestamp >= registrationEndTime, "Voting has not started yet.");
+        require(block.timestamp <= votingEndTime, "Voting has ended.");
+        _;
+    }
+
+    modifier onlyNotRegistered() {
+        require(!voters[msg.sender].isRegistered, "You are already registered.");
+        _;
+    }
+
+    modifier onlyRegistered() {
+        require(voters[msg.sender].isRegistered, "You are not registered.");
+        _;
+    }
+
+    function registerVoter() external onlyDuringRegistration onlyNotRegistered {
+        voters[msg.sender].isRegistered = true;
+    }
+
+    function startVoting() external {
+        require(block.timestamp >= registrationEndTime, "Voting cannot start yet.");
+        require(!isVotingOpen, "Voting is already open.");
+        isVotingOpen = true;
+    }
+
+    function vote(address _chairmanCandidate, address[] memory _boardMemberCandidates, bool _abstain)
+        external
+        onlyDuringVoting
+        onlyRegistered
+    {
+        require(!voters[msg.sender].hasVoted, "You have already voted.");
+        voters[msg.sender].chairmanCandidate = _chairmanCandidate;
+        voters[msg.sender].boardMemberCandidates = _boardMemberCandidates;
+        voters[msg.sender].votedAbstain = _abstain;
+        voters[msg.sender].hasVoted = true;
+    }
+
+    function tallyVotes() external onlyDuringVoting {
+        require(!isVotingOpen, "Voting is still open.");
+
+        // Logic for  determining the winners
+
+        // Count votes for the chairman and board members
+        // ...
+
+        // Update chairman and board members
+        chairman = chairmanCandidate;
+        boardMembers = boardMemberCandidates;
+
+        // Emit events
+        emit ChairmanElected(chairman);
+        emit BoardMembersElected(boardMembers);
+    }
+}
